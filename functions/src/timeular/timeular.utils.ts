@@ -1,17 +1,17 @@
 import axios from "axios";
 import {DateTime} from "luxon";
 import {logger, https} from "firebase-functions";
-import {initializeApp} from "firebase-admin";
 import {getFirestore} from "firebase-admin/firestore";
 import {USERS_COLLECTION} from "../constants";
 import {User} from "../users/user.model";
+import {initFirebase} from "../utils/firebase.utils";
 
 const timeularendpoint = "https://api.timeular.com/api/v3/";
 
 
 
 export async function getApiKeys(userId: string): Promise<{apiKey: string; apiSecret: string}> {
-    initializeApp();
+    initFirebase();
     const db = getFirestore();
     const user = await db.collection(USERS_COLLECTION).doc(userId).get();
     if (!user.exists) {

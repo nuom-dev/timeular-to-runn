@@ -1,16 +1,16 @@
 import {logger} from "firebase-functions";
 import {regionalFunctions} from "../utils/functions.utils";
-import { initializeApp } from 'firebase-admin/app';
 import { getFirestore } from'firebase-admin/firestore';
 import {USERS_COLLECTION} from "../constants";
 import {createNewUser} from "../users/users.utils";
 import * as functions from 'firebase-functions';
+import {initFirebase} from "../utils/firebase.utils";
 
 
 
 
 export const onUserRegisters = regionalFunctions.auth.user().onCreate(async (user) => {
-  initializeApp();
+  initFirebase();
   const db = getFirestore();
 
   logger.debug('user created', user.email, user.uid);
