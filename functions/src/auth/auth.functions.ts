@@ -7,10 +7,11 @@ import {createNewUser} from "../users/users.utils";
 import * as functions from 'firebase-functions';
 
 
-initializeApp();
-const db = getFirestore();
+
 
 export const onUserRegisters = regionalFunctions.auth.user().onCreate(async (user) => {
+  initializeApp();
+  const db = getFirestore();
 
   logger.debug('user created', user.email, user.uid);
 

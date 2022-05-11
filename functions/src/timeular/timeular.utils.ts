@@ -8,10 +8,11 @@ import {User} from "../users/user.model";
 
 const timeularendpoint = "https://api.timeular.com/api/v3/";
 
-initializeApp();
-const db = getFirestore();
+
 
 export async function getApiKeys(userId: string): Promise<{apiKey: string; apiSecret: string}> {
+    initializeApp();
+    const db = getFirestore();
     const user = await db.collection(USERS_COLLECTION).doc(userId).get();
     if (!user.exists) {
       throw new https.HttpsError("not-found", "User not found");
