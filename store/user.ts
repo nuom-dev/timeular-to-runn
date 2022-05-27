@@ -16,6 +16,7 @@ export const state = (): UserState => ({
 
 export const getters: GetterTree<UserState, RootState> = {
   timeular: (state)=> state.user?.timeular || null,
+  user: (state)=> state.user || null,
   projectsMapping: (state)=> state.user?.projectsMapping || {},
 };
 
@@ -45,6 +46,12 @@ export const actions: ActionTree<UserState, RootState> = {
     await unbindFirestoreRef('user');
     commit('CLEAR_USER');
   }),
+  async updateUser({rootGetters}, data: Partial<User>) {
+    const uid = rootGetters['auth/user'].uid;
+    if(!uid) return;
+    const response = await this.$fire.firestore.collection(USERS_COLLECTION).doc(uid).update(data);
+    console.log({userUpdateResponse: response})
+  },
   updateTimeularSettings(_context, settings: {apiKey?: string, apiSecret?: string}) {
     if (!this.$fire.auth.currentUser) return;
     const db = this.$fire.firestore;

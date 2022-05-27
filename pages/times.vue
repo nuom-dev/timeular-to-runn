@@ -63,7 +63,7 @@ export default class times extends Vue {
     return this.entries.map(entry => ({
       ...entry,
       timeularActivity: this.activitiesMap[entry.activityId],
-      runnProject: this.projectsMap[this.projectsMapping[entry.activityId]] ?? null
+      runnProject: this.projectsMap[this.projectsMapping[entry.activityId]] ?? null,
     }));
   }
 

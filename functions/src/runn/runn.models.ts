@@ -71,3 +71,21 @@ export interface Person {
   ],
   is_placeholder: string
 }
+
+export interface Role {
+  id: string,
+  name: string,
+  archived: true,
+  references: {
+    name: {
+      external_id: string
+    }
+  },
+  default_hour_cost: number,
+  standard_rate: number,
+  people: {
+    id: string,
+    name: string,
+    archived: boolean
+  }
+}

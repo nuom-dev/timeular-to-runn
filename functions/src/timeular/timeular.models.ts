@@ -9,6 +9,7 @@ export interface Activity {
 export interface Entry {
   id: string
   activityId: string
+  saved?: boolean
   duration: {
     startedAt: string
     stoppedAt: string

@@ -19,6 +19,20 @@ export async function getRunnProjects() {
   }
 }
 
+export async function getRunnRoles() {
+  try {
+    const response = await axios.get(apiUrl + "roles", {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    logger.error(err);
+    return err.message;
+  }
+}
+
 export async function getRunnPersonByEmail(email: string): Promise<Person | undefined> {
   try {
     const response = await axios.get<Person[]>(apiUrl + "people", {
@@ -27,6 +41,28 @@ export async function getRunnPersonByEmail(email: string): Promise<Person | unde
       },
     });
     return response.data.find((person) => person.email === email);
+  } catch (err) {
+    logger.error(err);
+    return err.message;
+  }
+}
+
+export async function addActualTimeEntry({date, personId, projectId, roleId, minutes}: {date: Date, personId: string, projectId: string, roleId: string, minutes: number}) {
+  try {
+    const data = {
+      date: date.toISOString().split('T')[0],
+      person_id: personId,
+      project_id: projectId,
+      role_id: roleId,
+      billable_minutes: minutes,
+    }
+    logger.info({actualData: data});
+    const response = await axios.post(apiUrl + "actuals/time_entry", data, {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+    });
+    return response.data;
   } catch (err) {
     logger.error(err);
     return err.message;

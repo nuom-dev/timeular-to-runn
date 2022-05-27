@@ -1,6 +1,7 @@
 <template>
   <div class='w-screen h-screen flex items-center justify-center'>
-    <div class='container p-8 bg-white rounded-lg filter drop-shadow mx-auto md:w-1/3 text-primary' >
+    <div class='container p-14 bg-white rounded-lg filter drop-shadow-xl mx-auto md:w-1/3 text-primary flex justify-center flex-col' >
+        <h1 class="text-xl font-bold mb-14 w-full text-center text-brand-primary">Transfer your Timeular timesheets to Runn</h1>
         <button class='w-full rounded-full py-2 text-secondary my-2 border border-gray-200 drop-shadow filter flex-row justify-center' @click='googleLogin'>
           <icons-google-icon class='h-6 inline mr-2'/> Login with Google
         </button>

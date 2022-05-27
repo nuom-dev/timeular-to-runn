@@ -48,6 +48,7 @@ export default class SettingsPage extends Vue {
     return [
       {name: 'Timeular', href: 'timeular', current: currentTab === 'timeular'},
       {name: 'Project Mapping', href: 'activities', current: currentTab === 'activities'},
+      {name: 'Runn', href: 'runn', current: currentTab === 'runn'},
 
     ]
   }

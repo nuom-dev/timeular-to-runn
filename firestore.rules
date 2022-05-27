@@ -4,6 +4,9 @@ service cloud.firestore {
     match /users/{userId} {
         allow read, update: if request.auth.uid == userId || request.auth.token.email == resource.data.email;
      }
+     match /users/{userId}/savedEntries/{entryId} {
+         allow read, update: if request.auth.uid == userId || request.auth.token.email == resource.data.email;
+      }
      match /config/{configId} {
         allow read: if isAuthenticated();
      }

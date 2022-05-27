@@ -6,6 +6,7 @@ export interface User {
   };
   runn?: {
     personId?: string;
+    roleId?: string;
   };
   projectsMapping?: Record<string, string>;
 }
