@@ -1,6 +1,6 @@
-require('dotenv').config()
+require('dotenv').config();
 
-const useEmulators = true
+const useEmulators = false;
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -17,7 +17,10 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'}
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+      },
     ],
   },
 
@@ -44,17 +47,17 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    '@nuxtjs/firebase'
+    '@nuxtjs/firebase',
   ],
 
   firebase: {
     config: {
-      apiKey: "AIzaSyCoSA9S1E7j3pYk2g_31GeWpkaSi9H3uA4",
-      authDomain: "timeular2runn.firebaseapp.com",
-      projectId: "timeular2runn",
-      storageBucket: "timeular2runn.appspot.com",
-      messagingSenderId: "205752903545",
-      appId: "1:205752903545:web:a3fb5b0e6093aa29bf71a8"
+      apiKey: 'AIzaSyCoSA9S1E7j3pYk2g_31GeWpkaSi9H3uA4',
+      authDomain: 'timeular2runn.firebaseapp.com',
+      projectId: 'timeular2runn',
+      storageBucket: 'timeular2runn.appspot.com',
+      messagingSenderId: '205752903545',
+      appId: '1:205752903545:web:a3fb5b0e6093aa29bf71a8',
     },
     services: {
       auth: {
@@ -71,12 +74,12 @@ export default {
           subscribeManually: false,
         },
         emulatorPort: useEmulators ? 9099 : undefined,
-        emulatorHost: 'http://localhost',
+        emulatorHost:  useEmulators ? 'http://localhost' : undefined,
       },
       firestore: {
         enablePersistence: false,
         emulatorPort: useEmulators ? 8080 : undefined,
-        emulatorHost: 'localhost',
+        emulatorHost:  useEmulators ? 'localhost' : undefined,
         settings: {
           ignoreUndefinedProperties: true,
         },
@@ -84,9 +87,8 @@ export default {
       functions: {
         location: 'europe-west2',
         emulatorPort: useEmulators ? 5001 : undefined,
-        emulatorHost: 'http://localhost',
+        emulatorHost:  useEmulators ? 'http://localhost' : undefined,
       },
-
     },
   },
 
@@ -105,4 +107,4 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-}
+};

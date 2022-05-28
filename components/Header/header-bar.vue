@@ -1,17 +1,16 @@
 <template>
   <div
-    :class='{
-      "lg:hidden": !showOnDesktop
-    }'
+    :class="{
+      'lg:hidden': !showOnDesktop,
+    }"
     class="relative z-40 flex-shrink-0 h-16 bg-white border-b border-gray-200 flex justify-end pr-6"
   >
     <div class="w-32 absolute left-4 top-4 lg:hidden">
       <nuxt-link :to="linkTo">
-        <img :src="logoUrl"/>
+        <img :src="logoUrl" />
       </nuxt-link>
     </div>
     <div class="ml-4 flex items-center lg:ml-6">
-
       <!--      <user-menu :menus="menus" :user-name="user && user.firstName + ' ' + user.lastName" />-->
 
       <button
@@ -26,22 +25,22 @@
 </template>
 
 <script lang="ts">
-import {Component, Getter, Prop, Vue} from "nuxt-property-decorator";
-import UserMenu, {UserMenuItemModel} from "~/components/Header/user-menu.vue";
-import {AuthUser} from "~/store/auth";
+import { Component, Getter, Prop, Vue } from 'nuxt-property-decorator';
+import UserMenu, { UserMenuItemModel } from '~/components/Header/user-menu.vue';
+import { AuthUser } from '~/store/auth';
 
 @Component({
-  components: {UserMenu},
+  components: { UserMenu },
 })
 export default class HeaderBar extends Vue {
   // @Prop({ default: '' }) menus!: { link: string; label: string }[];
   @Getter('config/userMenus') menus!: UserMenuItemModel[];
-  @Prop({default: true}) showOnDesktop!: boolean
+  @Prop({ default: true }) showOnDesktop!: boolean;
   @Getter('auth/user') user?: AuthUser;
-  @Getter('logoUrl') logoUrl!: string
+  @Getter('logoUrl') logoUrl!: string;
 
   get linkTo() {
-    return '/times'
+    return '/times';
   }
 }
 </script>

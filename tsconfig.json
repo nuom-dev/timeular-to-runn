@@ -18,6 +18,5 @@
     },
     "types": ["@nuxt/types", "@nuxtjs/axios", "@types/node", "@nuxtjs/firebase"]
   },
-  "exclude": ["node_modules", ".nuxt", "dist", "functions"],
-
+  "exclude": ["node_modules", ".nuxt", "dist", "functions"]
 }

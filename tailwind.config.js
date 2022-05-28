@@ -62,18 +62,36 @@ module.exports = {
   },
   variants: {
     extend: {
-      textColor: ['first', 'last', 'children', 'children-first', 'children-last'],
-      borderRadius: ['first', 'last', 'children', 'children-first', 'children-last'],
-      backgroundColor: ['first', 'last', 'children', 'children-first', 'children-last'],
+      textColor: [
+        'first',
+        'last',
+        'children',
+        'children-first',
+        'children-last',
+      ],
+      borderRadius: [
+        'first',
+        'last',
+        'children',
+        'children-first',
+        'children-last',
+      ],
+      backgroundColor: [
+        'first',
+        'last',
+        'children',
+        'children-first',
+        'children-last',
+      ],
     },
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),
     require('tailwindcss-children'),
     require('@tailwindcss/forms'),
-    plugin(function ({addBase, theme}) {
+    plugin(function ({ addBase, theme }) {
       addBase({
-        h1: {fontSize: theme('fontSize.xl')},
+        h1: { fontSize: theme('fontSize.xl') },
       });
     }),
   ],

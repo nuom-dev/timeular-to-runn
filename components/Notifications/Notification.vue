@@ -2,11 +2,15 @@
   <div
     class="relative bg-white rounded-lg drop-shadow-lg filter md:w-96 w-full px-4 py-4 my-2 flex flex-row justify-start items-center"
   >
-    <div v-if="!autoClose" class="absolute right-2 top-2" @click="$emit('click')">
-      <i class="cursor-pointer material-icons" >close</i>
+    <div
+      v-if="!autoClose"
+      class="absolute right-2 top-2"
+      @click="$emit('click')"
+    >
+      <i class="cursor-pointer material-icons">close</i>
     </div>
     <div :class="iconClasses" class="w-8 text-center mx-3">
-      <i class="material-icons">{{iconName}}</i>
+      <i class="material-icons">{{ iconName }}</i>
     </div>
     <div>
       <h1 class="text-black font-semibold text-sm mb-2">{{ title }}</h1>
@@ -24,9 +28,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
-import { Prop } from "vue-property-decorator";
-import { NotificationType } from "~/store/notifications";
+import { Component, Vue } from 'nuxt-property-decorator';
+import { Prop } from 'vue-property-decorator';
+import { NotificationType } from '~/store/notifications';
 
 @Component
 export default class Notification extends Vue {
@@ -36,7 +40,7 @@ export default class Notification extends Vue {
   @Prop({ default: '' }) icon!: string;
   @Prop({ default: '' }) iconColors!: string;
   @Prop({ default: false }) autoClose!: boolean;
-  @Prop({default: ''}) action?: string;
+  @Prop({ default: '' }) action?: string;
 
   get iconName() {
     switch (this.type) {
@@ -47,7 +51,7 @@ export default class Notification extends Vue {
       case 'success':
         return 'task_alt';
       default:
-        return this.icon
+        return this.icon;
     }
   }
 
@@ -59,19 +63,20 @@ export default class Notification extends Vue {
         return 'text-red-600';
       case 'success':
         return 'text-green-500';
-      default: return this.iconColors
+      default:
+        return this.iconColors;
     }
   }
 
   mounted() {
-    if(this.autoClose) {
-      let time = 5000
-      if(typeof this.autoClose === 'number') {
-        time = this.autoClose * 1000
+    if (this.autoClose) {
+      let time = 5000;
+      if (typeof this.autoClose === 'number') {
+        time = this.autoClose * 1000;
       }
-      setTimeout(()=>{
-        this.$emit('close')
-      }, time)
+      setTimeout(() => {
+        this.$emit('close');
+      }, time);
     }
   }
 }

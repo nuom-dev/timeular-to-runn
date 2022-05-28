@@ -1,7 +1,7 @@
 <template>
   <svg
     id="eHh01ZrJDY21"
-    class='fill-current'
+    class="fill-current"
     shape-rendering="geometricPrecision"
     text-rendering="geometricPrecision"
     viewBox="0 0 56 56"
@@ -9,7 +9,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
   >
     <title>Loading Spinner</title>
-    <g id="eHh01ZrJDY22_tr" >
+    <g id="eHh01ZrJDY22_tr">
       <animateTransform
         attributeName="transform"
         attributeType="XML"

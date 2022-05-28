@@ -1,5 +1,5 @@
-import {initializeApp} from "firebase-admin";
-import {logger} from "firebase-functions";
+import { initializeApp } from 'firebase-admin';
+import { logger } from 'firebase-functions';
 
 export function initFirebase() {
   try {

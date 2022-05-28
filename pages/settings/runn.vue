@@ -1,14 +1,9 @@
 <template>
   <div>
-    <div>
-      Person ID: {{user.runn.personId}}
-    </div>
+    <div>Runn's Person ID: {{ personId }}</div>
     <div>
       Your Role
-      <select
-        :value="roleId"
-        @input="changeRoleId($event.target.value)"
-      >
+      <select :value="roleId" @input="changeRoleId($event.target.value)">
         <option>None</option>
         <option
           v-for="role in roles"
@@ -22,11 +17,9 @@
 </template>
 
 <script lang="ts">
-
-import {Action, Component, Getter, Vue} from "nuxt-property-decorator";
-import {Role} from "~/functions/src/runn/runn.models";
-import {User } from '~/functions/src/users/user.model';
-
+import { Action, Component, Getter, Vue } from 'nuxt-property-decorator';
+import { Role } from '~/functions/src/runn/runn.models';
+import { User } from '~/functions/src/users/user.model';
 
 @Component
 export default class Runn extends Vue {
@@ -39,7 +32,7 @@ export default class Runn extends Vue {
   mounted() {
     this.loadRoles();
 
-    if(!this.user.runn?.personId) {
+    if (!this.user.runn?.personId) {
       this.updatePersonId();
     }
   }
@@ -48,18 +41,19 @@ export default class Runn extends Vue {
     return this.user?.runn?.roleId ?? '';
   }
 
+  get personId() {
+    return this.user?.runn?.personId ?? '';
+  }
+
   changeRoleId(roleId: string) {
     this.updateUser({
       runn: {
         personId: this.user.runn?.personId ?? '',
-        roleId
-      }
-    })
+        roleId,
+      },
+    });
   }
-
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

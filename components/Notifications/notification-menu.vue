@@ -1,6 +1,5 @@
 <template>
   <div class="fixed top-2 right-8 z-10">
-
     <div
       v-show="show"
       aria-labelledby="user-menu-button"
@@ -23,9 +22,9 @@
 </template>
 
 <script lang="ts">
-import { Action, Component, Getter, Vue } from "nuxt-property-decorator";
-import Notification from "./Notification.vue";
-import { NotificationModel } from "~/store/notifications";
+import { Action, Component, Getter, Vue } from 'nuxt-property-decorator';
+import Notification from './Notification.vue';
+import { NotificationModel } from '~/store/notifications';
 
 @Component({
   components: { Notification },
@@ -33,13 +32,19 @@ import { NotificationModel } from "~/store/notifications";
 export default class NotificationMenu extends Vue {
   @Getter('notifications/notificationList')
   notificationList!: NotificationModel[];
+
   @Getter('notifications/showNotifications') show!: boolean;
-  @Action('notifications/setNotificationSeen') setNotificationSeen!: (index: number) => void;
-  @Action('notifications/runNotificationAction') runNotificationAction!: (index: number) => void;
+  @Action('notifications/setNotificationSeen') setNotificationSeen!: (
+    index: number
+  ) => void;
+
+  @Action('notifications/runNotificationAction') runNotificationAction!: (
+    index: number
+  ) => void;
+
   @Action('notifications/toggle') toggleNotificationList!: () => void;
 
   action(index: number) {
-    console.log('clicked ' + index);
     this.runNotificationAction(index);
   }
 }

@@ -19,7 +19,10 @@
         From: "opacity-100"
         To: "opacity-0"
     -->
-    <div aria-hidden="true" class="absolute mt-16 inset-0 bg-gray-600 bg-opacity-75"></div>
+    <div
+      aria-hidden="true"
+      class="absolute mt-16 inset-0 bg-gray-600 bg-opacity-75"
+    ></div>
 
     <!--
       Off-canvas menu, show/hide based on off-canvas menu state.
@@ -68,7 +71,7 @@
       </div>
 
       <div class="flex-grow flex flex-col justify-between">
-        <nav class="px-2 ">
+        <nav class="px-2">
           <sidebar-item
             v-for="item of topItems"
             :key="item.link"
@@ -89,42 +92,48 @@
 </template>
 
 <script lang="ts">
-import {Component, Getter, Prop, Vue} from "nuxt-property-decorator";
-import SidebarLogo from "~/components/Sidebars/sidebar-logo.vue";
-import SidebarItem from "~/components/Sidebars/sidebar-item.vue";
-import {SidebarItemModel} from "~/components/Sidebars/sidebar.types";
+import { Component, Getter, Prop, Vue } from 'nuxt-property-decorator';
+import SidebarLogo from '~/components/Sidebars/sidebar-logo.vue';
+import SidebarItem from '~/components/Sidebars/sidebar-item.vue';
+import { SidebarItemModel } from '~/components/Sidebars/sidebar.types';
 
 @Component({
-  components: {SidebarItem, SidebarLogo},
+  components: { SidebarItem, SidebarLogo },
 })
 export default class MobileSidebar extends Vue {
-  @Prop({default: () => ({src: '', alt: 'Logo'})}) logo!: { src: string; alt: string };
-  @Prop({default: false}) show!: boolean;
+  @Prop({ default: () => ({ src: '', alt: 'Logo' }) }) logo!: {
+    src: string;
+    alt: string;
+  };
+
+  @Prop({ default: false }) show!: boolean;
   @Getter('config/sidebarMenus') items!: SidebarItemModel[];
   @Getter('config/activeMenuLink') activeMenuLink!: string;
 
   get bottomItems() {
-    return this.items.filter(i => i.isBottom)
-      .map(i => ({...i, active: i.link === this.activeMenuLink}))
+    return this.items
+      .filter((i) => i.isBottom)
+      .map((i) => ({ ...i, active: i.link === this.activeMenuLink }))
       .sort((a, b) => {
-        if (!a.order && !b.order) return 0
-        else if (!a.order && b.order) return 1
-        else if (a.order && !b.order) return -1
-        else if (a.order && b.order) return a.order - b.order
-        else return 0
-      })
+        if (!a.order && !b.order) return 0;
+        else if (!a.order && b.order) return 1;
+        else if (a.order && !b.order) return -1;
+        else if (a.order && b.order) return a.order - b.order;
+        else return 0;
+      });
   }
 
   get topItems() {
-    return this.items.filter(i => !i.isBottom)
-      .map(i => ({...i, active: i.link === this.activeMenuLink}))
+    return this.items
+      .filter((i) => !i.isBottom)
+      .map((i) => ({ ...i, active: i.link === this.activeMenuLink }))
       .sort((a, b) => {
-        if (!a.order && !b.order) return 0
-        else if (!a.order && b.order) return 1
-        else if (a.order && !b.order) return -1
-        else if (a.order && b.order) return a.order - b.order
-        else return 0
-      })
+        if (!a.order && !b.order) return 0;
+        else if (!a.order && b.order) return 1;
+        else if (a.order && !b.order) return -1;
+        else if (a.order && b.order) return a.order - b.order;
+        else return 0;
+      });
   }
 }
 </script>

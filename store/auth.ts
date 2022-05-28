@@ -1,7 +1,6 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex/types';
 import { RootState } from '~/store/index';
 
-
 export type AuthUser = {
   uid: string;
   email: string;
@@ -42,7 +41,7 @@ export const actions: ActionTree<AuthState, RootState> = {
         uid: authUser.uid,
         email: authUser.email,
       });
-      dispatch('user/bindUser', null,{root: true});
+      dispatch('user/bindUser', null, { root: true });
     } else {
       commit('CLEAR_USER');
     }
@@ -59,16 +58,11 @@ export const actions: ActionTree<AuthState, RootState> = {
       email: user.email,
     });
 
-    dispatch('user/bindUser', null,{root: true});
-
+    dispatch('user/bindUser', null, { root: true });
   },
   userLoggedOut: async ({ commit, dispatch }) => {
     await dispatch('user/unbindUser', null, { root: true });
 
     commit('CLEAR_USER');
   },
-
-
-
-
 };

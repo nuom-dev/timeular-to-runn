@@ -27,13 +27,16 @@ export const state = (): NotificationsState => ({
 });
 
 export const getters: GetterTree<NotificationsState, RootState> = {
-  latestNotification: (state) => state.notifications[state.notifications.length - 1],
+  latestNotification: (state) =>
+    state.notifications[state.notifications.length - 1],
   showNotifications: (state) => state.show,
-  notificationList: (state) => state.notifications.map((n) => ({ ...n, func: undefined })),
+  notificationList: (state) =>
+    state.notifications.map((n) => ({ ...n, func: undefined })),
 };
 
 export const mutations: MutationTree<NotificationsState> = {
-  ADD_NOTIFICATION: (state, notification: NotificationModel) => state.notifications.push({ ...notification }),
+  ADD_NOTIFICATION: (state, notification: NotificationModel) =>
+    state.notifications.push({ ...notification }),
   SET_NOTIFICATION_SEEN: (state, index: number) => {
     const notifications = [...state.notifications];
     notifications[index] = { ...notifications[index], read: true };
@@ -48,8 +51,12 @@ export const actions: ActionTree<NotificationsState, RootState> = {
   addNotification({ commit }, notification: NotificationModel) {
     commit('ADD_NOTIFICATION', notification);
   },
-  async showError({ dispatch }, { title, error }: { title: string; error: any }) {
-    const message = error.response?.data?.message || error.response?.message || error.message;
+  async showError(
+    { dispatch },
+    { title, error }: { title: string; error: any }
+  ) {
+    const message =
+      error.response?.data?.message || error.response?.message || error.message;
     const notification: NotificationModel = {
       title,
       message,

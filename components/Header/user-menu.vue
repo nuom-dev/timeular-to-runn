@@ -21,7 +21,7 @@
         v-if="profilePicture"
         :src="profilePicture"
         alt="Profile"
-        class="h-8 w-8 rounded-full "
+        class="h-8 w-8 rounded-full"
       />
       <client-only>
         <mdicon class="text-gray-400" name="account-circle" />
@@ -52,7 +52,10 @@
           {{ menu.label }}
         </nuxt-link>
         <footer class="text-primary border-t px-4 py-2 hover:bg-gray-100">
-          <nuxt-link class="group rounded-lg flex items-center text-base font-medium" to="/logout">
+          <nuxt-link
+            class="group rounded-lg flex items-center text-base font-medium"
+            to="/logout"
+          >
             <mdicon class="flex-shrink-0 h-6 w-6 mr-2" name="logout-variant" />
             <span>Logout</span>
           </nuxt-link>
@@ -63,8 +66,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import ClickOutside from 'vue-click-outside'
+import { Component, Prop, Vue } from 'nuxt-property-decorator';
+import ClickOutside from 'vue-click-outside';
 
 export interface UserMenuItemModel {
   label: string;

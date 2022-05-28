@@ -74,7 +74,10 @@
         <stop offset="1" stop-color="#f92e2d" />
       </linearGradient>
       <clipPath id="clip-path-2">
-        <path class="cls-1" d="M64.67,47.63a17.51,17.51,0,1,0-8,6.16,17.4,17.4,0,0,0,8-6.16" />
+        <path
+          class="cls-1"
+          d="M64.67,47.63a17.51,17.51,0,1,0-8,6.16,17.4,17.4,0,0,0,8-6.16"
+        />
       </clipPath>
       <linearGradient
         id="linear-gradient-2"
@@ -107,7 +110,10 @@
         <stop offset="1" stop-color="#f45c19" />
       </linearGradient>
       <clipPath id="clip-path-4">
-        <path class="cls-1" d="M57.58,34a6.86,6.86,0,1,0,1.58.18A6.77,6.77,0,0,0,57.58,34" />
+        <path
+          class="cls-1"
+          d="M57.58,34a6.86,6.86,0,1,0,1.58.18A6.77,6.77,0,0,0,57.58,34"
+        />
       </clipPath>
       <linearGradient
         id="linear-gradient-4"
@@ -219,9 +225,14 @@
       class="cls-2"
       d="M269.36,67.43a.82.82,0,0,1,.81.82.85.85,0,0,1-.81.9.9.9,0,0,1-.91-.9.87.87,0,0,1,.91-.82"
     />
-    <g class="cls-3"><rect class="cls-4" x="22.85" y="20" width="55.24" height="55.24" /></g>
+    <g class="cls-3">
+      <rect class="cls-4" x="22.85" y="20" width="55.24" height="55.24" />
+    </g>
     <g class="cls-5">
-      <polygon class="cls-6" points="55.94 73.64 12.74 42.78 44.15 -0.92 87.33 29.93 55.94 73.64" />
+      <polygon
+        class="cls-6"
+        points="55.94 73.64 12.74 42.78 44.15 -0.92 87.33 29.93 55.94 73.64"
+      />
     </g>
     <g class="cls-7">
       <rect

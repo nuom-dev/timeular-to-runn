@@ -9,7 +9,9 @@ export enum ChangeType {
   UPDATE,
 }
 
-export const getChangeType = (change: firebaseFunctions.Change<DocumentSnapshot>) => {
+export const getChangeType = (
+  change: firebaseFunctions.Change<DocumentSnapshot>
+) => {
   if (!change.after.exists) {
     return ChangeType.DELETE;
   }
