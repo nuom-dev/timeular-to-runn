@@ -40,7 +40,8 @@ export const getters: GetterTree<RootState, RootState> = {
 export const mutations: MutationTree<RootState> = {
   ...vuexfireMutations,
   setStartDate: (state, date: Date) => state.startDate = date,
-  setEndDate: (state, date: Date) => state.endDate = date
+  setEndDate: (state, date: Date) => state.endDate = date,
+  SET_LOADING: (state, loading: string) => state.loading = loading,
 }
 
 
@@ -48,9 +49,9 @@ export const actions: ActionTree<RootState, RootState> = {
   startLoading({ commit }, _loading?: string) {
     let loading = _loading;
     if (!loading) loading = ' ';
-    // commit('SET_LOADING', loading);
+    commit('SET_LOADING', loading);
   },
   endLoading({ commit }) {
-    // commit('SET_LOADING', '');
+    commit('SET_LOADING', '');
   },
 };

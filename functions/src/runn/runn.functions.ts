@@ -41,13 +41,17 @@ export const addEntry = regionalFunctions.https.onCall(async (data: {minutes: nu
 
   try {
 
-    const response = addActualTimeEntry({
+    const response = await addActualTimeEntry({
       date: new Date(data.date),
       minutes: data.minutes,
       personId: data.runnId,
       projectId: data.projectId,
       roleId: data.roleId,
     })
+
+    if(response.error) {
+      throw new https.HttpsError('unknown', response.error)
+    }
 
     initFirebase();
     const db = getFirestore();

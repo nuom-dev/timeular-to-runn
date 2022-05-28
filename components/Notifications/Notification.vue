@@ -3,21 +3,22 @@
     class="relative bg-white rounded-lg drop-shadow-lg filter md:w-96 w-full px-4 py-4 my-2 flex flex-row justify-start items-center"
   >
     <div v-if="!autoClose" class="absolute right-2 top-2" @click="$emit('click')">
-      <mdicon class="cursor-pointer" name="close" size="14"  />
+      <i class="cursor-pointer material-icons" >close</i>
     </div>
-    <div :class="iconClasses" class="w-8 text-center">
-      <mdicon :name="iconName" size="20"/>
+    <div :class="iconClasses" class="w-8 text-center mx-3">
+      <i class="material-icons">{{iconName}}</i>
     </div>
     <div>
       <h1 class="text-black font-semibold text-sm mb-2">{{ title }}</h1>
       <p class="text-gray-500 font-normal text-xs">{{ message }}</p>
-      <label class="text-gray-500 font-normal text-xs">Action</label>
-      <button
-        id="actionButton"
-        class="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-        v-if="action"
-        @click="$emit('action')"
-      />
+      <div v-if="action">
+        <label class="text-gray-500 font-normal text-xs">Action</label>
+        <button
+          id="actionButton"
+          class="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+          @click="$emit(action)"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -35,16 +36,16 @@ export default class Notification extends Vue {
   @Prop({ default: '' }) icon!: string;
   @Prop({ default: '' }) iconColors!: string;
   @Prop({ default: false }) autoClose!: boolean;
-  @Prop() action?: string;
+  @Prop({default: ''}) action?: string;
 
   get iconName() {
     switch (this.type) {
       case 'info':
-        return 'information';
+        return 'info';
       case 'error':
-        return 'alert-circle';
+        return 'error';
       case 'success':
-        return 'check-circle';
+        return 'task_alt';
       default:
         return this.icon
     }

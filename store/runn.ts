@@ -56,17 +56,29 @@ export const actions: ActionTree<TimeularState, RootState> = {
     const end = dayjs(entry.duration.stoppedAt)
     const minutes = end.diff(start, 'minutes')
 
-    const response = await addEntryFunction({
-      entryId: entry.id,
-      minutes,
-      date: start.toDate().toISOString(),
-      projectId: entry.runnProject?.id,
-      runnId: rootState.user.user?.runn?.personId ?? '',
-      roleId: rootState.user.user?.runn?.roleId ?? '',
-    })
-    console.log({response})
 
-    dispatch('timeular/isEntryAlreadySaved', [entry.id], {root: true})
+    try {
+      dispatch('startLoading', 'Saving Entry', {root: true})
+      const response = await addEntryFunction({
+        entryId: entry.id,
+        minutes,
+        date: start.toDate().toISOString(),
+        projectId: entry.runnProject?.id,
+        runnId: rootState.user.user?.runn?.personId ?? '',
+        roleId: rootState.user.user?.runn?.roleId ?? '',
+      })
+      console.log({response})
+
+      await dispatch('timeular/isEntryAlreadySaved', [entry.id], {root: true})
+      dispatch('endLoading', '', {root: true})
+      dispatch('notifications/addNotification', {message: entry.timeularActivity.name + ' Saved', type: 'success', title: 'Entry' +
+          ' saved', autoClose: 0.7}, {root: true})
+    } catch (e) {
+      console.error(e)
+      dispatch('endLoading', '', {root: true})
+      dispatch('notifications/addNotification', {message: e.message, type: 'error', title: 'Couldn\'t save this' +
+          ' entry', autoClose: 0.7}, {root: true})
+    }
   },
   async updatePersonId({rootGetters}) {
     const email = rootGetters['user/user']?.email

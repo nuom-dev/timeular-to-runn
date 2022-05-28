@@ -1,6 +1,6 @@
 import axios from "axios";
 import {logger, config} from "firebase-functions";
-import {Person} from "./runn.models";
+import {Person, Project} from "./runn.models";
 
 const apiUrl = 'https://app.runn.io/api/v0/'
 const apiKey = config().runn.apikey;
@@ -47,6 +47,20 @@ export async function getRunnPersonByEmail(email: string): Promise<Person | unde
   }
 }
 
+export async function getSingleProject(projectId: string): Promise<Project> {
+  try {
+    const response = await axios.get<Project>(apiUrl + "projects/" + projectId, {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    logger.error(err);
+    throw new Error(err.message);
+  }
+}
+
 export async function addActualTimeEntry({date, personId, projectId, roleId, minutes}: {date: Date, personId: string, projectId: string, roleId: string, minutes: number}) {
   try {
     const data = {
@@ -54,8 +68,18 @@ export async function addActualTimeEntry({date, personId, projectId, roleId, min
       person_id: personId,
       project_id: projectId,
       role_id: roleId,
-      billable_minutes: minutes,
+      billable_minutes: 0,
+      nonbillable_minutes:0
     }
+
+    const project = await getSingleProject(projectId);
+    if(project.pricing_model === 'nb'){
+      data['nonbillable_minutes'] = minutes;
+    } else {
+      data['billable_minutes'] = minutes;
+    }
+
+
     logger.info({actualData: data});
     const response = await axios.post(apiUrl + "actuals/time_entry", data, {
       headers: {
@@ -65,6 +89,8 @@ export async function addActualTimeEntry({date, personId, projectId, roleId, min
     return response.data;
   } catch (err) {
     logger.error(err);
-    return err.message;
+    return {
+      error: err.message,
+    };
   }
 }

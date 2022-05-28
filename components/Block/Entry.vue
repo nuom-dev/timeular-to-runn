@@ -1,5 +1,5 @@
 <template>
-  <li class="p-2 border border-warm-gray-300 rounded-lg shadow m-1" :class="{'bg-green-300': entry.saved, 'bg-white': !entry.saved}">
+  <li class="p-2 border border-warm-gray-300 rounded-lg shadow m-1" :class="{'bg-brand-primary-light': entry.saved, 'bg-white': !entry.saved}">
     <div>
       <span>Start: {{(new Date(entry.duration.startedAt)).toLocaleString()}}</span>
       <span>End: {{(new Date(entry.duration.stoppedAt)).toLocaleString()}}</span>

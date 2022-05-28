@@ -49,17 +49,24 @@ export const actions: ActionTree<TimeularState, RootState> = {
     })
   },
   getEntries({ commit, dispatch }, {startDate, endDate}: {startDate: Date, endDate: Date}) {
+    dispatch('startLoading', 'Saving Entry', {root: true})
     this.$fire.functions.httpsCallable('timeular-getEntries')({startDate, endDate})
-      .then(response => {
+      .then(async response => {
         console.log(response)
         commit('setEntries', response.data.timeEntries);
 
         const entries: Entry[] = response.data.timeEntries
         const entriesIds = entries.map(a => a.id);
-        dispatch('isEntryAlreadySaved', entriesIds);
-      })
+        await dispatch('isEntryAlreadySaved', entriesIds);
+        dispatch('endLoading', '', {root: true})
+        dispatch('notifications/addNotification', {message: '', type: 'success', title: 'Entries loaded'}, {root: true})
+      }).catch(error => {
+      console.log(error)
+      dispatch('endLoading', '', {root: true})
+      dispatch('notifications/showError', {error: error.message, title: 'Couldn\'t get the entries'}, {root: true})
+    })
   },
-  async isEntryAlreadySaved({rootGetters, commit}, ids: string[]) {
+  async isEntryAlreadySaved({rootGetters, commit, dispatch}, ids: string[]) {
     const uid = rootGetters['auth/user'].uid;
     if (!uid) return false;
 
@@ -74,6 +81,7 @@ export const actions: ActionTree<TimeularState, RootState> = {
         commit('setEntrySaved', snap.id);
       }
     }
+    dispatch('endLoading', '', {root: true})
   }
 
 };

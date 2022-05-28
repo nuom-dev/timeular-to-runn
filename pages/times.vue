@@ -13,10 +13,16 @@
     </div>
     <div>
       <button
-        class="rounded-full text-white bg-brand-primary py-2 px-4"
+        class="rounded-full text-white bg-brand-primary py-2 px-4 mx-4"
         @click="getEntriesBetweenDates"
       >
         Get Entries
+      </button>
+      <button
+        class="rounded-full text-white bg-brand-primary py-2 px-4 mx-4"
+        @click="addAll"
+      >
+        Add All Valid Entries
       </button>
     </div>
     <div class="mt-8">
@@ -37,6 +43,10 @@ import {Action, Component, Getter, Vue} from "nuxt-property-decorator";
 import {Activity, Entry} from "~/functions/src/timeular/timeular.models";
 import {Project} from "~/functions/src/runn/runn.models";
 
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 @Component({
   layout: 'dashboard'
 })
@@ -50,6 +60,7 @@ export default class times extends Vue {
   @Action('timeular/loadActivities') loadActivities!: () => Promise<void>;
   @Action('runn/loadProjects') loadProjects!: () => Promise<void>;
   @Action("timeular/getEntries") getEntries!: (date: {startDate: Date, endDate: Date}) => Promise<void>;
+  @Action("runn/saveEntry") saveEntry!: (entry: Entry) => Promise<void>;
 
   get start() {
     return this.startDate.toISOString().split("T")[0];
@@ -90,6 +101,15 @@ export default class times extends Vue {
       this.getEntries({startDate: this.startDate, endDate: this.endDate})
     ]);
     await this.$store.dispatch('endLoading');
+  }
+
+  async addAll() {
+    const filteredEntries = this.timeEntries.filter(entry => entry.runnProject?.id && !entry.saved);
+
+    for(const entry of filteredEntries){
+      await this.saveEntry(entry)
+      await sleep(200)
+    }
   }
 
 }
